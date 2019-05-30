@@ -35,10 +35,12 @@ public:
     void sanity();
 
     // Run solver
-    void run();
+    bool run();
 
     // Debugger
     void dump_rules();
+
+    bool is_solved();
 
 private:
 

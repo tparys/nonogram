@@ -68,7 +68,7 @@ void solver::sanity()
 }
 
 // Run solver
-void solver::run()
+bool solver::run()
 {
     size_t old_count;
 
@@ -89,6 +89,8 @@ void solver::run()
         }
 
     } while (old_count != solved_cells_);
+
+    return is_solved();
 }
 
 // Rule Debugger
@@ -127,6 +129,22 @@ void solver::dump_rules()
     }
 
     cout << "Total row/col sums: " << (int)row_tally << " " << (int)col_tally << endl;
+}
+
+bool solver::is_solved()
+{
+    for (size_t r = 0; r < nrows_; r++)
+    {
+	for (size_t c = 0; c < ncols_; c++)
+	{
+	    uint32_t cell = board_[r][c];
+	    if (cell & (cell - 1))
+	    {
+		return false;
+	    }
+	}
+    }
+    return true;
 }
 
 void solver::apply_row_patterns()
@@ -340,11 +358,12 @@ void solver::make_a_guess()
             }
 
             // See if that worked ...
-            clone.run();
-
-            // Guess it did ...
-            *this = clone;
-            return;
+            if (clone.run())
+ 	    {
+		// Guess it did ...
+		*this = clone;
+		return;
+	    }
         }
         catch (exception &e)
         {
