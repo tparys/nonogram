@@ -135,14 +135,14 @@ bool solver::is_solved()
 {
     for (size_t r = 0; r < nrows_; r++)
     {
-	for (size_t c = 0; c < ncols_; c++)
-	{
-	    uint32_t cell = board_[r][c];
-	    if (cell & (cell - 1))
-	    {
-		return false;
-	    }
-	}
+        for (size_t c = 0; c < ncols_; c++)
+        {
+            uint32_t cell = board_[r][c];
+            if (cell & (cell - 1))
+            {
+                return false;
+            }
+        }
     }
     return true;
 }
@@ -359,11 +359,11 @@ void solver::make_a_guess()
 
             // See if that worked ...
             if (clone.run())
- 	    {
-		// Guess it did ...
-		*this = clone;
-		return;
-	    }
+            {
+                // Guess it did ...
+                *this = clone;
+                return;
+            }
         }
         catch (exception &e)
         {

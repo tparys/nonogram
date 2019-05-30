@@ -18,13 +18,13 @@ int main(int argc, char **argv)
     try
     {
         if (app.run())
-	{
-	    cout << "Solution found" << endl;
-	}
-	else
-	{
-	    cout << "No solution found" << endl;
-	}
+        {
+            cout << "Solution found" << endl;
+        }
+        else
+        {
+            cout << "No solution found" << endl;
+        }
     }
     catch (exception &e)
     {
